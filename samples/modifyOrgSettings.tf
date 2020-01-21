@@ -6,7 +6,7 @@ provider "okadmin" {
         api_token = "123455"
 }
 
-resource "okorgcreator_server" "MyOrg" {
+resource "okadmin_server" "MyOrg" {
     name= "terraform-p2s"
     website= "https://google.com"
     secondary_email= false
@@ -15,5 +15,9 @@ resource "okorgcreator_server" "MyOrg" {
     portal_error_redirect_url = "https://google.com"
     portal_signout_url = "https://google.com"
     interstitial_min_wait_time = 1200 
+}
+
+resource "okadmin_interstitialSettings" "interstitialSettings" {
+   interstitial_page_enabled= false
 }
 
