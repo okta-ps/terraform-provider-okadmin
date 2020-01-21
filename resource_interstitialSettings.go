@@ -34,7 +34,7 @@ func resourceInterstitialSettingsCreate(d *schema.ResourceData, m interface{}) e
 	// oktaInterstitialPageId := d.Get("interstitial_page_id").(string)
 	// d.SetId(oktaInterstitialPageId)
 	// return resourceInterstitialSettingsRead(d, m)
-	return resourceServerRead(d, m)
+	return resourceInterstitialSettingsRead(d, m)
 }
 
 func getJsonResponseInt(body []byte) (*interstitialsettings, error) {
@@ -122,7 +122,7 @@ func resourceInterstitialSettingsUpdate(d *schema.ResourceData, m interface{}) e
 
 	d.Partial(false)
 
-	return resourceServerRead(d, m)
+	return resourceInterstitialSettingsRead(d, m)
 }
 
 func resourceInterstitialSettingsDelete(d *schema.ResourceData, m interface{}) error {
