@@ -6,7 +6,7 @@ provider "okadmin" {
         api_token = "123455"
 }
 
-resource "okadmin_server" "MyOrg" {
+resource "okadmin_updateServerSettings" "MyOrg" {
     name= "terraform-p2s"
     website= "https://google.com"
     secondary_email= false
