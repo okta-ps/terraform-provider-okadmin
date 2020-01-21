@@ -18,17 +18,13 @@ func resourceServer() *schema.Resource {
 		Delete: resourceServerDelete,
 
 		Schema: map[string]*schema.Schema{
-			// "id": &schema.Schema{
-			// 	Type: schema.TypeString,
-			// 	Optional: true,
-			// },
 			"subdomain": &schema.Schema{
 				Type:     schema.TypeString,
-				Required: true,
+				Computed: true,
 			},
 			"name": &schema.Schema{
 				Type:     schema.TypeString,
-				Required: true,
+				Optional: true,
 			},
 			"website": &schema.Schema{
 				Type:     schema.TypeString,
@@ -74,7 +70,15 @@ func resourceServer() *schema.Resource {
 				Type:     schema.TypeBool,
 				Required: true,
 			},
-			"error_redirect_url": &schema.Schema{
+			"app_error_redirect_url": &schema.Schema{
+				Type:     schema.TypeString,
+				Required: true,
+			},
+			"portal_error_redirect_url": &schema.Schema{
+				Type:     schema.TypeString,
+				Required: true,
+			},
+			"portal_signout_url": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
 			},
@@ -153,6 +157,11 @@ func resourceServerRead(d *schema.ResourceData, m interface{}) error {
 	}
 
 	d.SetId(s.ID)
+	d.Set("website", s.W)
+	d.Set("name", s.N)
+	d.Set("subdomain", s.SU)
+	d.Set("secondary_email", s.S.U.A.SE)
+	d.Set("secondary_image", s.S.U.A.SI)
 
 	return nil
 }
@@ -170,13 +179,11 @@ func resourceServerUpdate(d *schema.ResourceData, m interface{}) error {
 
 	d.Partial(true)
 
-	// id := d.Get("org_id").(string)
-
 	url := fmt.Sprintf("https://%s.%s/api/v1/orgs/%s", m.(*Config).templateOrgName, m.(*Config).domain, m.(*Config).templateOrgName)
 
 	client := &http.Client{}
 
-	appSettings := app{d.Get("error_redirect_url").(string), d.Get("interstitial_min_wait_time").(int)}
+	appSettings := app{d.Get("app_error_redirect_url").(string), d.Get("interstitial_min_wait_time").(int)}
 
 	attr := attributes{d.Get("secondary_email").(bool), d.Get("secondary_image").(bool)}
 
