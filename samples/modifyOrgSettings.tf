@@ -6,13 +6,14 @@ provider "okadmin" {
         api_token = "123455"
 }
 
-resource "okadmin_server" "MyOrg" {
-    subdomain= "terraform-p2"
+resource "okorgcreator_server" "MyOrg" {
     name= "terraform-p2s"
-    website= "https://client1.greenlake.com"
-    secondary_email= true
-    secondary_image= true
-    error_redirect_url = "https://client.greenlake.com"
+    website= "https://google.com"
+    secondary_email= false
+    secondary_image= false
+    app_error_redirect_url = "https://google.com"
+    portal_error_redirect_url = "https://google.com"
+    portal_signout_url = "https://google.com"
     interstitial_min_wait_time = 1200 
 }
 

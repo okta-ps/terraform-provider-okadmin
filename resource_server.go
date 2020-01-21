@@ -95,6 +95,11 @@ type app struct {
 	IMWT int    `json:"interstitialMinWaitTime"`
 }
 
+type portal struct {
+	ERU        string `json:"errorRedirectUrl"`
+	SignoutUrl string `json:"signOutUrl"`
+}
+
 type attributes struct {
 	SE bool `json:"secondaryEmail"`
 	SI bool `json:"secondaryImage"`
@@ -106,6 +111,7 @@ type userAccount struct {
 type settings struct {
 	A app         `json:"app"`
 	U userAccount `json:"userAccount"`
+	P portal      `json:"portal"`
 }
 
 type orgsettings struct {
@@ -185,11 +191,13 @@ func resourceServerUpdate(d *schema.ResourceData, m interface{}) error {
 
 	appSettings := app{d.Get("app_error_redirect_url").(string), d.Get("interstitial_min_wait_time").(int)}
 
+	portalSettings := portal{d.Get("portal_error_redirect_url").(string), d.Get("portal_signout_url").(string)}
+
 	attr := attributes{d.Get("secondary_email").(bool), d.Get("secondary_image").(bool)}
 
 	ua := userAccount{attr}
 
-	As := settings{appSettings, ua}
+	As := settings{appSettings, ua, portalSettings}
 
 	org := orgsettings{"", d.Get("subdomain").(string), d.Get("name").(string), d.Get("website").(string), As}
 
