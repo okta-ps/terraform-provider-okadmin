@@ -20,7 +20,7 @@ func resourceCreateOktaServer() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"subdomain": &schema.Schema{
 				Type:     schema.TypeString,
-				Computed: true,
+				Required: true,
 			},
 			"name": &schema.Schema{
 				Type:     schema.TypeString,
@@ -64,27 +64,27 @@ func resourceCreateOktaServer() *schema.Resource {
 			},
 			"secondary_email": &schema.Schema{
 				Type:     schema.TypeBool,
-				Required: true,
+				Optional: true,
 			},
 			"secondary_image": &schema.Schema{
 				Type:     schema.TypeBool,
-				Required: true,
+				Optional: true,
 			},
 			"app_error_redirect_url": &schema.Schema{
 				Type:     schema.TypeString,
-				Required: true,
+				Optional: true,
 			},
 			"portal_error_redirect_url": &schema.Schema{
 				Type:     schema.TypeString,
-				Required: true,
+				Optional: true,
 			},
 			"portal_signout_url": &schema.Schema{
 				Type:     schema.TypeString,
-				Required: true,
+				Optional: true,
 			},
 			"interstitial_min_wait_time": &schema.Schema{
 				Type:     schema.TypeInt,
-				Required: true,
+				Optional: true,
 			},
 			"token": &schema.Schema{
 				Type:     schema.TypeString,
