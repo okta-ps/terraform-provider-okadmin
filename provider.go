@@ -32,6 +32,7 @@ func Provider() *schema.Provider {
 		ResourcesMap: map[string]*schema.Resource{
 			"okadmin_updateServerSettings": resourceupdateServerSettings(),
 			"okadmin_interstitialSettings": resourceInterstitialSettings(),
+			"okadmin_createOktaServer":     resourceCreateOktaServer(),
 		},
 		ConfigureFunc: providerConfigure,
 	}

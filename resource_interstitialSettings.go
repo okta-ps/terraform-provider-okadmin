@@ -27,13 +27,10 @@ func resourceInterstitialSettings() *schema.Resource {
 }
 
 type interstitialsettings struct {
-	OIE bool `json:"oktaInterstitialEnabled"`
+	OktaInterstitialEnabled bool `json:"oktaInterstitialEnabled,false"`
 }
 
 func resourceInterstitialSettingsCreate(d *schema.ResourceData, m interface{}) error {
-	// oktaInterstitialPageId := d.Get("interstitial_page_id").(string)
-	// d.SetId(oktaInterstitialPageId)
-	// return resourceInterstitialSettingsRead(d, m)
 	return resourceInterstitialSettingsRead(d, m)
 }
 
@@ -56,10 +53,11 @@ func resourceInterstitialSettingsRead(d *schema.ResourceData, m interface{}) err
 	if err != nil {
 		return err
 	}
-	// req.Header.Add("Authorization", fmt.Sprintf("SSWS %s", d.Get("api_token")))
+
 	req.Header.Add("Authorization", fmt.Sprintf("SSWS %s", m.(*Config).apiToken))
 	req.Header.Add("Content-Type", "application/json")
 	req.Header.Add("Accept", "application/json")
+
 	resp, err := client.Do(req)
 	if err != nil {
 		return err
@@ -68,6 +66,7 @@ func resourceInterstitialSettingsRead(d *schema.ResourceData, m interface{}) err
 	} else if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("failed to get Org Details for url: %s, status: %s", url, resp.Status)
 	}
+
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		panic(err.Error())
@@ -78,8 +77,8 @@ func resourceInterstitialSettingsRead(d *schema.ResourceData, m interface{}) err
 		fmt.Println("Error getting the Json Response:", s)
 	}
 
-	// d.SetId(d.Id()
-	d.Set("interstitial_page_enabled", s.OIE)
+	d.SetId(fmt.Sprintf("%s.%s-interstitialpage", m.(*Config).templateOrgName, m.(*Config).domain))
+	d.Set("interstitial_page_enabled", s.OktaInterstitialEnabled)
 
 	return nil
 }
@@ -119,6 +118,18 @@ func resourceInterstitialSettingsUpdate(d *schema.ResourceData, m interface{}) e
 	} else if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("failed to Modify Interstitial Page Settings for url: %s, status: %s, req: %s", url, resp.Status, bytesJson)
 	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	s, err := getJsonResponseInt([]byte(body))
+	if err == nil {
+		fmt.Println("Error getting the Json Response:", s)
+	}
+
+	d.Set("interstitial_page_enabled", s.OktaInterstitialEnabled)
 
 	d.Partial(false)
 
