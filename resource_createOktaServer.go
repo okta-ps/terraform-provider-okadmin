@@ -128,8 +128,8 @@ type App struct {
 	InterstitialMinWaitTime int         `json:"interstitialMinWaitTime,omitempty"`
 }
 type Attributes struct {
-	SecondaryEmail bool `json:"secondaryEmail,omitempty"`
-	SecondaryImage bool `json:"secondaryImage,omitempty"`
+	SecondaryEmail interface{} `json:"secondaryEmail,omitempty"`
+	SecondaryImage interface{} `json:"secondaryImage,omitempty"`
 }
 type UserAccount struct {
 	Attributes *Attributes `json:"attributes,omitempty"`
