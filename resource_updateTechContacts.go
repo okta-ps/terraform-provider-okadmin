@@ -41,7 +41,7 @@ type technicalcontacts struct {
 }
 
 func resourceUpdateTechContactsCreate(d *schema.ResourceData, m interface{}) error {
-	return resourceUpdateTechContactsRead(d, m)
+	return resourceUpdateTechContactsUpdate(d, m)
 }
 
 func getContactsJson(body []byte) (*technicalcontacts, error) {

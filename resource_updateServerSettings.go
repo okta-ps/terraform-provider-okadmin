@@ -93,7 +93,7 @@ func resourceupdateServerSettings() *schema.Resource {
 func resourceupdateServerSettingsCreate(d *schema.ResourceData, m interface{}) error {
 	// subdomain := d.Get("subdomain").(string)
 	// d.SetId(subdomain)
-	return resourceupdateServerSettingsRead(d, m)
+	return resourceupdateServerSettingsUpdate(d, m)
 }
 
 func resourceupdateServerSettingsRead(d *schema.ResourceData, m interface{}) error {

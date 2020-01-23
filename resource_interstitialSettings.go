@@ -31,7 +31,7 @@ type interstitialsettings struct {
 }
 
 func resourceInterstitialSettingsCreate(d *schema.ResourceData, m interface{}) error {
-	return resourceInterstitialSettingsRead(d, m)
+	return resourceInterstitialSettingsUpdate(d, m)
 }
 
 func getJsonResponseInt(body []byte) (*interstitialsettings, error) {
