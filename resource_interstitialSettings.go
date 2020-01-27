@@ -16,6 +16,7 @@ func resourceInterstitialSettings() *schema.Resource {
 		Read:   resourceInterstitialSettingsRead,
 		Update: resourceInterstitialSettingsUpdate,
 		Delete: resourceInterstitialSettingsDelete,
+		// Importer: resourceInterstitialSettingsImport,
 
 		Schema: map[string]*schema.Schema{
 			"interstitial_page_enabled": &schema.Schema{
@@ -140,3 +141,43 @@ func resourceInterstitialSettingsDelete(d *schema.ResourceData, m interface{}) e
 	d.SetId("")
 	return nil
 }
+
+// func resourceInterstitialSettingsImport(d *schema.ResourceData, m interface{}) error {
+// 	url := fmt.Sprintf("https://%s-admin.%s/api/internal/v1/oktaInterstitial/settings", m.(*Config).templateOrgName, m.(*Config).domain)
+
+// 	client := &http.Client{}
+
+// 	req, err := http.NewRequest("GET", url, nil)
+
+// 	if err != nil {
+// 		return err
+// 	}
+
+// 	req.Header.Add("Authorization", fmt.Sprintf("SSWS %s", m.(*Config).apiToken))
+// 	req.Header.Add("Content-Type", "application/json")
+// 	req.Header.Add("Accept", "application/json")
+
+// 	resp, err := client.Do(req)
+// 	if err != nil {
+// 		return err
+// 	} else if resp.StatusCode == http.StatusNotFound {
+// 		return nil
+// 	} else if resp.StatusCode != http.StatusOK {
+// 		return fmt.Errorf("failed to get Org Details for url: %s, status: %s", url, resp.Status)
+// 	}
+
+// 	body, err := ioutil.ReadAll(resp.Body)
+// 	if err != nil {
+// 		panic(err.Error())
+// 	}
+
+// 	s, err := getJsonResponseInt([]byte(body))
+// 	if err == nil {
+// 		fmt.Println("Error getting the Json Response:", s)
+// 	}
+
+// 	d.SetId(fmt.Sprintf("%s.%s-interstitialpage", m.(*Config).templateOrgName, m.(*Config).domain))
+// 	d.Set("interstitial_page_enabled", s.OktaInterstitialEnabled)
+
+// 	return nil
+// }

@@ -108,10 +108,11 @@ func resourceupdateServerSettingsRead(d *schema.ResourceData, m interface{}) err
 	if err != nil {
 		return err
 	}
-	// req.Header.Add("Authorization", fmt.Sprintf("SSWS %s", d.Get("api_token")))
+
 	req.Header.Add("Authorization", fmt.Sprintf("SSWS %s", m.(*Config).apiToken))
 	req.Header.Add("Content-Type", "application/json")
 	req.Header.Add("Accept", "application/json")
+
 	resp, err := client.Do(req)
 	if err != nil {
 		return err
@@ -126,7 +127,7 @@ func resourceupdateServerSettingsRead(d *schema.ResourceData, m interface{}) err
 	}
 
 	s, err := getJsonResponse([]byte(body))
-	if err == nil {
+	if err != nil {
 		fmt.Println("Error getting the Json Response:", s)
 	}
 
@@ -162,9 +163,8 @@ func resourceupdateServerSettingsUpdate(d *schema.ResourceData, m interface{}) e
 	client := &http.Client{}
 
 	org := orgsettings{
-		Subdomain: d.Get("subdomain").(string),
-		Name:      d.Get("name").(string),
-		Website:   d.Get("website").(string),
+		Name:    d.Get("name").(string),
+		Website: d.Get("website").(string),
 		Settings: &Settings{
 			App: &App{
 				ErrorRedirectURL:        d.Get("app_error_redirect_url").(string),
@@ -210,9 +210,31 @@ func resourceupdateServerSettingsUpdate(d *schema.ResourceData, m interface{}) e
 		return fmt.Errorf("failed to update Org Details for url: %s, status: %s, req: %s", url, resp.Status, bytesJson)
 	}
 
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	s, err := getJsonResponse([]byte(body))
+	if err != nil {
+		fmt.Println("Error getting the Json Response:", s)
+	}
+
+	d.SetId(s.ID)
+	d.Set("website", s.Website)
+	d.Set("name", s.Name)
+	d.Set("subdomain", s.Subdomain)
+	d.Set("secondary_email", s.Settings.UserAccount.Attributes.SecondaryEmail)
+	d.Set("secondary_image", s.Settings.UserAccount.Attributes.SecondaryImage)
+	d.Set("app_error_redirect_url", s.Settings.App.ErrorRedirectURL)
+	d.Set("portal_error_redirect_url", s.Settings.Portal.ErrorRedirectURL)
+	d.Set("portal_signout_url", s.Settings.Portal.SignOutURL)
+	d.Set("interstitial_min_wait_time", s.Settings.App.InterstitialMinWaitTime)
+
 	d.Partial(false)
 
-	return resourceupdateServerSettingsRead(d, m)
+	return nil
+
 }
 
 func resourceupdateServerSettingsDelete(d *schema.ResourceData, m interface{}) error {
