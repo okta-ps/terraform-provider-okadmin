@@ -36,8 +36,9 @@ As we build out resources we build concomitant acceptance tests that require use
 Clone repository to: `$GOPATH/src/github.com/patluri43/terraform-provider-okadmin`
 
 cd $GOPATH/src/github.com/patluri43/terraform-provider-okadmin
+```
 ./build.sh
-
+```
 
 ## Using the provider
 
@@ -70,7 +71,7 @@ resource "okadmin_updateServerSettings" "MyOrg" {
 			"okadmin_updateTechnicalContacts"
 			"okadmin_updateTheatInsightSettings"
 			"okadmin_createApiTokens"
-            
+
 ## Disclaimer
 
 There are particular resources and settings that are not exposed on Okta's public API. Please submit an issue if you find one not listed here.
