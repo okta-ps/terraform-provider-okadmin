@@ -62,6 +62,15 @@ resource "okadmin_updateServerSettings" "MyOrg" {
 }
 ```
 
+## Supported Resources by Provider
+
+			"okadmin_updateServerSettings"
+			"okadmin_interstitialSettings"
+			"okadmin_createOktaServer"
+			"okadmin_updateTechnicalContacts"
+			"okadmin_updateTheatInsightSettings"
+			"okadmin_createApiTokens"
+            
 ## Disclaimer
 
 There are particular resources and settings that are not exposed on Okta's public API. Please submit an issue if you find one not listed here.
