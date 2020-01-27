@@ -10,7 +10,7 @@ provider "okadmin" {
 resource "okadmin_createOktaServer" "myOktaServer" {
     subdomain="terraform-p2"
     name= "terraform-p2s"
-    website= "https://google.com"
+    website= "https://okta.com"
     first_name= "user"
     last_name = "ln"
     email = "user.ln@domain.com"

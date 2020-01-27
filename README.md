@@ -53,12 +53,12 @@ provider "okadmin" {
 
 resource "okadmin_updateServerSettings" "MyOrg" {
     name= "terraform-p2"
-    website= "https://google456.com"
+    website= "https://okta456.com"
     secondary_email= false
     secondary_image= true
-    app_error_redirect_url = "https://google.com"
-    portal_error_redirect_url = "https://google.com"
-    portal_signout_url = "https://google.com"
+    app_error_redirect_url = "https://okta.com"
+    portal_error_redirect_url = "https://okta.com"
+    portal_signout_url = "https://okta.com"
     interstitial_min_wait_time = 900
 }
 ```
