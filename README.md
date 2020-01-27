@@ -2,7 +2,7 @@
 
 ## Maintainers
 
-This provider plugin is maintained by the Praveen Atluri. 
+
 
 ## Requirements
 
