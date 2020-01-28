@@ -69,8 +69,8 @@ https://github.com/patluri43/terraform-provider-okadmin/tree/master/samples
 			"okadmin_createOktaServer"
 			"okadmin_updateTechnicalContacts"
 			"okadmin_updateTheatInsightSettings"
-            "okadmin_updateOrgContactAddress"
 			"okadmin_createApiTokens"
+            "okadmin_updateOrgContactAddress"
 
 
 ## Disclaimer
