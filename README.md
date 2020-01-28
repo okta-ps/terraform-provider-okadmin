@@ -70,7 +70,7 @@ https://github.com/patluri43/terraform-provider-okadmin/tree/master/samples
 			"okadmin_updateTechnicalContacts"
 			"okadmin_updateTheatInsightSettings"
 			"okadmin_createApiTokens"
-            "okadmin_updateOrgContactAddress"
+                "okadmin_updateOrgContactAddress"
 
 
 ## Disclaimer
