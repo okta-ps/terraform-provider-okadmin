@@ -75,22 +75,10 @@ https://github.com/patluri43/terraform-provider-okadmin/tree/master/samples
 			"okadmin_createOktaServer"
 			"okadmin_updateTechnicalContacts"
 			"okadmin_updateTheatInsightSettings"
+            "okadmin_updateOrgContactAddress"
 			"okadmin_createApiTokens"
+
 
 ## Disclaimer
 
 There are particular resources and settings that are not exposed on Okta's public API. Please submit an issue if you find one not listed here.
-
-### Org Settings
-
-- Org level customization settings.
-
-
-## Common Errors
-
-
-## Developing the Provider
-
-
-
-### Best Practices

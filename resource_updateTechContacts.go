@@ -24,7 +24,7 @@ func resourceUpdateTechContacts() *schema.Resource {
 			},
 			"phone_number": &schema.Schema{
 				Type:     schema.TypeString,
-				Required: true,
+				Computed: true,
 			},
 			"help_url": &schema.Schema{
 				Type:     schema.TypeString,
@@ -103,7 +103,6 @@ func resourceUpdateTechContactsUpdate(d *schema.ResourceData, m interface{}) err
 
 	org := technicalcontacts{
 		TechnicalContactId: d.Get("technical_contact_id").(string),
-		PhoneNumber:        d.Get("phone_number").(string),
 		HelpUrl:            d.Get("help_url").(string),
 	}
 

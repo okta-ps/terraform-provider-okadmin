@@ -36,6 +36,7 @@ func Provider() *schema.Provider {
 			"okadmin_updateTechnicalContacts":    resourceUpdateTechContacts(),
 			"okadmin_updateTheatInsightSettings": resourceThreatInsightSettings(),
 			"okadmin_createApiTokens":            resourceCreateAPITokens(),
+			"okadmin_updateOrgContactAddress":    resourceupdateOrgContacts(),
 		},
 		ConfigureFunc: providerConfigure,
 	}
