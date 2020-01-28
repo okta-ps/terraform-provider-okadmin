@@ -63,7 +63,7 @@ https://github.com/patluri43/terraform-provider-okadmin/tree/master/samples
 ```
 
 ## Supported Resources by Provider
-
+```
 			"okadmin_updateServerSettings"
 			"okadmin_interstitialSettings"
 			"okadmin_createOktaServer"
@@ -71,7 +71,7 @@ https://github.com/patluri43/terraform-provider-okadmin/tree/master/samples
 			"okadmin_updateTheatInsightSettings"
 			"okadmin_createApiTokens"
             "okadmin_updateOrgContactAddress"
-            
+```
 
 
 ## Disclaimer
