@@ -63,6 +63,7 @@ https://github.com/patluri43/terraform-provider-okadmin/tree/master/samples
 ```
 
 ## Supported Resources by Provider
+
 ```
 			"okadmin_updateServerSettings"
 			"okadmin_interstitialSettings"
