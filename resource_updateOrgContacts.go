@@ -63,7 +63,7 @@ func resourceupdateOrgContactsCreate(d *schema.ResourceData, m interface{}) erro
 func resourceupdateOrgContactsRead(d *schema.ResourceData, m interface{}) error {
 	// id := d.Get("org_id").(string)
 
-	url := fmt.Sprintf("https://%s.%s/api/v1/orgs/%s/contacts", m.(*Config).templateOrgName, m.(*Config).domain, m.(*Config).templateOrgName)
+	url := fmt.Sprintf("https://%s.%s/api/v1/orgs/%s/contacts", m.(*Config).orgName, m.(*Config).domain, m.(*Config).orgName)
 
 	client := &http.Client{}
 
@@ -95,7 +95,7 @@ func resourceupdateOrgContactsRead(d *schema.ResourceData, m interface{}) error 
 		fmt.Println("Error getting the Json Response:", s)
 	}
 
-	d.SetId(fmt.Sprintf("%s.%s-orgcontactsettings", m.(*Config).templateOrgName, m.(*Config).domain))
+	d.SetId(fmt.Sprintf("%s.%s-orgcontactsettings", m.(*Config).orgName, m.(*Config).domain))
 	d.Set("street_address_1", s.Orgcontact.Steet_Address[0])
 	d.Set("street_address_2", s.Orgcontact.Steet_Address[1])
 	d.Set("city", s.Orgcontact.City)
@@ -139,7 +139,7 @@ func resourceupdateOrgContactsUpdate(d *schema.ResourceData, m interface{}) erro
 
 	d.Partial(true)
 
-	url := fmt.Sprintf("https://%s.%s/api/v1/orgs/%s/contacts", m.(*Config).templateOrgName, m.(*Config).domain, m.(*Config).templateOrgName)
+	url := fmt.Sprintf("https://%s.%s/api/v1/orgs/%s/contacts", m.(*Config).orgName, m.(*Config).domain, m.(*Config).orgName)
 
 	client := &http.Client{}
 
@@ -197,7 +197,7 @@ func resourceupdateOrgContactsUpdate(d *schema.ResourceData, m interface{}) erro
 		fmt.Println("Error getting the Json Response:", s)
 	}
 
-	d.SetId(fmt.Sprintf("%s.%s-orgcontactsettings", m.(*Config).templateOrgName, m.(*Config).domain))
+	d.SetId(fmt.Sprintf("%s.%s-orgcontactsettings", m.(*Config).orgName, m.(*Config).domain))
 	d.Set("street_address_1", s.Orgcontact.Steet_Address[0])
 	d.Set("street_address_2", s.Orgcontact.Steet_Address[1])
 	d.Set("city", s.Orgcontact.City)

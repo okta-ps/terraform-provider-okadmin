@@ -37,6 +37,7 @@ func Provider() *schema.Provider {
 			"okadmin_updateTheatInsightSettings": resourceThreatInsightSettings(),
 			"okadmin_createApiTokens":            resourceCreateAPITokens(),
 			"okadmin_updateOrgContactAddress":    resourceupdateOrgContacts(),
+			"okadmin_pushGroups":                 resourcepushGroups(),
 		},
 		ConfigureFunc: providerConfigure,
 	}
@@ -46,9 +47,9 @@ func providerConfigure(d *schema.ResourceData) (interface{}, error) {
 	log.Printf("[INFO] Initializing Okta Org Creator client")
 
 	config := Config{
-		templateOrgName: d.Get("org_name").(string),
-		domain:          d.Get("base_url").(string),
-		apiToken:        d.Get("api_token").(string),
+		orgName:  d.Get("org_name").(string),
+		domain:   d.Get("base_url").(string),
+		apiToken: d.Get("api_token").(string),
 	}
 	if err := config.loadAndValidate(); err != nil {
 		return nil, fmt.Errorf("[ERROR] Error initializing the Okta SDK clients: %v", err)

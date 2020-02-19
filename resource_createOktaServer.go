@@ -157,7 +157,7 @@ type orgsettings struct {
 
 func resourceCreateOktaServerCreate(d *schema.ResourceData, m interface{}) error {
 
-	url := fmt.Sprintf("https://%s.%s/api/v1/orgs", m.(*Config).templateOrgName, m.(*Config).domain)
+	url := fmt.Sprintf("https://%s.%s/api/v1/orgs", m.(*Config).orgName, m.(*Config).domain)
 
 	client := &http.Client{}
 

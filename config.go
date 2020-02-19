@@ -27,9 +27,9 @@ type (
 
 	// Config contains our provider schema values and Okta clients
 	Config struct {
-		templateOrgName string
-		domain          string
-		apiToken        string
+		orgName  string
+		domain   string
+		apiToken string
 		// retryCount   int
 		// parallelism  int
 		// waitForReset bool
@@ -45,7 +45,7 @@ func (c *Config) loadAndValidate() error {
 	httpClient := cleanhttp.DefaultClient()
 	httpClient.Transport = logging.NewTransport("Okta", httpClient.Transport)
 
-	orgUrl := fmt.Sprintf("https://%v.%v", c.templateOrgName, c.domain)
+	orgUrl := fmt.Sprintf("https://%v.%v", c.orgName, c.domain)
 
 	client, err := okta.NewClient(
 		context.Background(),

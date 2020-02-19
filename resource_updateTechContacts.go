@@ -54,7 +54,7 @@ func getContactsJson(body []byte) (*technicalcontacts, error) {
 }
 
 func resourceUpdateTechContactsRead(d *schema.ResourceData, m interface{}) error {
-	url := fmt.Sprintf("https://%s-admin.%s/api/internal/enduser-support", m.(*Config).templateOrgName, m.(*Config).domain)
+	url := fmt.Sprintf("https://%s-admin.%s/api/internal/enduser-support", m.(*Config).orgName, m.(*Config).domain)
 
 	client := &http.Client{}
 
@@ -87,7 +87,7 @@ func resourceUpdateTechContactsRead(d *schema.ResourceData, m interface{}) error
 		fmt.Println("Error getting the Json Response:", s)
 	}
 
-	d.SetId(fmt.Sprintf("%s.%s-TechnicalContacts", m.(*Config).templateOrgName, m.(*Config).domain))
+	d.SetId(fmt.Sprintf("%s.%s-TechnicalContacts", m.(*Config).orgName, m.(*Config).domain))
 	d.Set("technical_contact_id", s.TechnicalContactId)
 	d.Set("phone_number", s.PhoneNumber)
 	d.Set("help_url", s.HelpUrl)
@@ -97,7 +97,7 @@ func resourceUpdateTechContactsRead(d *schema.ResourceData, m interface{}) error
 func resourceUpdateTechContactsUpdate(d *schema.ResourceData, m interface{}) error {
 	d.Partial(true)
 
-	url := fmt.Sprintf("https://%s-admin.%s/api/internal/enduser-support", m.(*Config).templateOrgName, m.(*Config).domain)
+	url := fmt.Sprintf("https://%s-admin.%s/api/internal/enduser-support", m.(*Config).orgName, m.(*Config).domain)
 
 	client := &http.Client{}
 

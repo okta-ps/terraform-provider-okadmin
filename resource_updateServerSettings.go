@@ -99,7 +99,7 @@ func resourceupdateServerSettingsCreate(d *schema.ResourceData, m interface{}) e
 func resourceupdateServerSettingsRead(d *schema.ResourceData, m interface{}) error {
 	// id := d.Get("org_id").(string)
 
-	url := fmt.Sprintf("https://%s.%s/api/v1/orgs/%s", m.(*Config).templateOrgName, m.(*Config).domain, m.(*Config).templateOrgName)
+	url := fmt.Sprintf("https://%s.%s/api/v1/orgs/%s", m.(*Config).orgName, m.(*Config).domain, m.(*Config).orgName)
 
 	client := &http.Client{}
 
@@ -158,7 +158,7 @@ func resourceupdateServerSettingsUpdate(d *schema.ResourceData, m interface{}) e
 
 	d.Partial(true)
 
-	url := fmt.Sprintf("https://%s.%s/api/v1/orgs/%s", m.(*Config).templateOrgName, m.(*Config).domain, m.(*Config).templateOrgName)
+	url := fmt.Sprintf("https://%s.%s/api/v1/orgs/%s", m.(*Config).orgName, m.(*Config).domain, m.(*Config).orgName)
 
 	client := &http.Client{}
 

@@ -45,7 +45,7 @@ func getJsonResponseInt(body []byte) (*interstitialsettings, error) {
 }
 
 func resourceInterstitialSettingsRead(d *schema.ResourceData, m interface{}) error {
-	url := fmt.Sprintf("https://%s-admin.%s/api/internal/v1/oktaInterstitial/settings", m.(*Config).templateOrgName, m.(*Config).domain)
+	url := fmt.Sprintf("https://%s-admin.%s/api/internal/v1/oktaInterstitial/settings", m.(*Config).orgName, m.(*Config).domain)
 
 	client := &http.Client{}
 
@@ -78,7 +78,7 @@ func resourceInterstitialSettingsRead(d *schema.ResourceData, m interface{}) err
 		fmt.Println("Error getting the Json Response:", s)
 	}
 
-	d.SetId(fmt.Sprintf("%s.%s-interstitialpage", m.(*Config).templateOrgName, m.(*Config).domain))
+	d.SetId(fmt.Sprintf("%s.%s-interstitialpage", m.(*Config).orgName, m.(*Config).domain))
 	d.Set("interstitial_page_enabled", s.OktaInterstitialEnabled)
 
 	return nil
@@ -87,7 +87,7 @@ func resourceInterstitialSettingsRead(d *schema.ResourceData, m interface{}) err
 func resourceInterstitialSettingsUpdate(d *schema.ResourceData, m interface{}) error {
 	d.Partial(true)
 
-	url := fmt.Sprintf("https://%s-admin.%s/api/internal/v1/oktaInterstitial/settings", m.(*Config).templateOrgName, m.(*Config).domain)
+	url := fmt.Sprintf("https://%s-admin.%s/api/internal/v1/oktaInterstitial/settings", m.(*Config).orgName, m.(*Config).domain)
 
 	client := &http.Client{}
 
@@ -143,7 +143,7 @@ func resourceInterstitialSettingsDelete(d *schema.ResourceData, m interface{}) e
 }
 
 // func resourceInterstitialSettingsImport(d *schema.ResourceData, m interface{}) error {
-// 	url := fmt.Sprintf("https://%s-admin.%s/api/internal/v1/oktaInterstitial/settings", m.(*Config).templateOrgName, m.(*Config).domain)
+// 	url := fmt.Sprintf("https://%s-admin.%s/api/internal/v1/oktaInterstitial/settings", m.(*Config).orgName, m.(*Config).domain)
 
 // 	client := &http.Client{}
 
@@ -176,7 +176,7 @@ func resourceInterstitialSettingsDelete(d *schema.ResourceData, m interface{}) e
 // 		fmt.Println("Error getting the Json Response:", s)
 // 	}
 
-// 	d.SetId(fmt.Sprintf("%s.%s-interstitialpage", m.(*Config).templateOrgName, m.(*Config).domain))
+// 	d.SetId(fmt.Sprintf("%s.%s-interstitialpage", m.(*Config).orgName, m.(*Config).domain))
 // 	d.Set("interstitial_page_enabled", s.OktaInterstitialEnabled)
 
 // 	return nil
