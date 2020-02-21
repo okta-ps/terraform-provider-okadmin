@@ -65,7 +65,7 @@ func getapiTokensJson(body []byte) (*apiTokens, error) {
 }
 
 func resourceCreateAPITokensRead(d *schema.ResourceData, m interface{}) error {
-	url := fmt.Sprintf("https://%s-admin.%s/api/internal/tokens/%s", m.(*Config).templateOrgName, m.(*Config).domain, d.Id())
+	url := fmt.Sprintf("https://%s-admin.%s/api/internal/tokens/%s", m.(*Config).orgName, m.(*Config).domain, d.Id())
 
 	client := &http.Client{}
 
@@ -109,7 +109,7 @@ func resourceCreateAPITokensRead(d *schema.ResourceData, m interface{}) error {
 func resourceCreateAPITokensUpdate(d *schema.ResourceData, m interface{}) error {
 	d.Partial(true)
 
-	url := fmt.Sprintf("https://%s-admin.%s/api/internal/tokens", m.(*Config).templateOrgName, m.(*Config).domain)
+	url := fmt.Sprintf("https://%s-admin.%s/api/internal/tokens", m.(*Config).orgName, m.(*Config).domain)
 
 	client := &http.Client{}
 
@@ -167,7 +167,7 @@ func resourceCreateAPITokensUpdate(d *schema.ResourceData, m interface{}) error 
 }
 
 func resourceCreateAPITokensDelete(d *schema.ResourceData, m interface{}) error {
-	url := fmt.Sprintf("https://%s-admin.%s/api/internal/tokens/%s/revoke", m.(*Config).templateOrgName, m.(*Config).domain, d.Id())
+	url := fmt.Sprintf("https://%s-admin.%s/api/internal/tokens/%s/revoke", m.(*Config).orgName, m.(*Config).domain, d.Id())
 
 	client := &http.Client{}
 

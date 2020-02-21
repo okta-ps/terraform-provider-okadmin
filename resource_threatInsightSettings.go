@@ -52,7 +52,7 @@ func getThreatInsightsJson(body []byte) (*threatinsight, error) {
 }
 
 func resourceThreatInsightSettingsRead(d *schema.ResourceData, m interface{}) error {
-	url := fmt.Sprintf("https://%s.%s/api/v1/threats/configuration", m.(*Config).templateOrgName, m.(*Config).domain)
+	url := fmt.Sprintf("https://%s.%s/api/v1/threats/configuration", m.(*Config).orgName, m.(*Config).domain)
 
 	client := &http.Client{}
 
@@ -85,7 +85,7 @@ func resourceThreatInsightSettingsRead(d *schema.ResourceData, m interface{}) er
 		fmt.Println("Error getting the Json Response:", s)
 	}
 
-	d.SetId(fmt.Sprintf("%s.%s-ThreatInsights", m.(*Config).templateOrgName, m.(*Config).domain))
+	d.SetId(fmt.Sprintf("%s.%s-ThreatInsights", m.(*Config).orgName, m.(*Config).domain))
 	d.Set("action", s.Action)
 	d.Set("exclude_zones", s.Exclude_zones)
 	return nil
@@ -94,7 +94,7 @@ func resourceThreatInsightSettingsRead(d *schema.ResourceData, m interface{}) er
 func resourceThreatInsightSettingsUpdate(d *schema.ResourceData, m interface{}) error {
 	d.Partial(true)
 
-	url := fmt.Sprintf("https://%s.%s/api/v1/threats/configuration", m.(*Config).templateOrgName, m.(*Config).domain)
+	url := fmt.Sprintf("https://%s.%s/api/v1/threats/configuration", m.(*Config).orgName, m.(*Config).domain)
 
 	client := &http.Client{}
 
