@@ -51,16 +51,18 @@ func resourceCreateOktaServer() *schema.Resource {
 				Required: true,
 			},
 			"password": &schema.Schema{
-				Type:     schema.TypeString,
-				Required: true,
+				Type:      schema.TypeString,
+				Required:  true,
+				Sensitive: true,
 			},
 			"recovery_question": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
 			},
 			"recovery_answer": &schema.Schema{
-				Type:     schema.TypeString,
-				Required: true,
+				Type:      schema.TypeString,
+				Required:  true,
+				Sensitive: true,
 			},
 			"secondary_email": &schema.Schema{
 				Type:     schema.TypeBool,
@@ -193,7 +195,7 @@ func resourceCreateOktaServerCreate(d *schema.ResourceData, m interface{}) error
 
 	r := bytes.NewReader(bytesJson)
 
-	req, err := http.NewRequest("PUT", url, r)
+	req, err := http.NewRequest("POST", url, r)
 
 	if err != nil {
 		return err
