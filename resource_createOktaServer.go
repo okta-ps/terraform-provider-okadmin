@@ -89,8 +89,9 @@ func resourceCreateOktaServer() *schema.Resource {
 				Optional: true,
 			},
 			"token": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:      schema.TypeString,
+				Computed:  true,
+				Sensitive: true,
 			},
 			"token_type": &schema.Schema{
 				Type:     schema.TypeString,
@@ -216,7 +217,7 @@ func resourceCreateOktaServerCreate(d *schema.ResourceData, m interface{}) error
 		return err
 	} else if resp.StatusCode == http.StatusNotFound {
 		return nil
-	} else if resp.StatusCode != http.StatusOK {
+	} else if resp.StatusCode != http.StatusCreated {
 		return fmt.Errorf("failed to update Org Details for url: %s, status: %s, req: %s", url, resp.Status, bytesJson)
 	}
 
