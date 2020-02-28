@@ -3,9 +3,11 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
@@ -16,6 +18,19 @@ func resourceCreateOktaServer() *schema.Resource {
 		Read:   resourceCreateOktaServerRead,
 		Update: resourceCreateOktaServerUpdate,
 		Delete: resourceCreateOktaServerDelete,
+		Importer: &schema.ResourceImporter{
+			State: func(d *schema.ResourceData, meta interface{}) ([]*schema.ResourceData, error) {
+				// This allows importing an initial token for an org already
+				// created via external method.  Subsequent run will "update"
+				// state to match config values, but since Update function does
+				// nothing it will have no effect.
+				if d.Id() != "env" {
+					return nil, errors.New("Only \"env\" import type is supported")
+				}
+				d.Set("token", os.Getenv("IMPORT_ORG_token"))
+				return []*schema.ResourceData{d}, nil
+			},
+		},
 
 		Schema: map[string]*schema.Schema{
 			"subdomain": &schema.Schema{
